@@ -7,6 +7,8 @@ name = "pypi"
 mongoengine = "*"
 pymongo = "*"
 redis-lru = "*"
+pika = "*"
+faker = "*"
 
 [dev-packages]
 
