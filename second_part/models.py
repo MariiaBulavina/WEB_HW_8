@@ -8,6 +8,8 @@ class Contact(Document):
     fullname = StringField(max_length=100)
     email = StringField(max_length=50)
     address = StringField()
+    phone_number = StringField(max_length=30)
     sent = BooleanField(default=False)
+    preferred_shipping = StringField(max_length=10)
     meta = {'collection': 'contacts'}
 

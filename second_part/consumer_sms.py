@@ -13,9 +13,9 @@ pika.ConnectionParameters(
 )
 )
 
-channel = connection.channel()
-queue_name = "hw_8_queue"
-channel.queue_declare(queue=queue_name, durable=True)
+sms_channel = connection.channel()
+sms_queue_name = "sms_queue"
+sms_channel.queue_declare(queue=sms_queue_name, durable=True)
 
 
 def callback(ch, method, properties, body):
@@ -32,8 +32,8 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
-channel.basic_qos(prefetch_count=1)
-channel.basic_consume(queue=queue_name, on_message_callback=callback)
+sms_channel.basic_qos(prefetch_count=1)
+sms_channel.basic_consume(queue=sms_queue_name, on_message_callback=callback)
 
 
 def send_message():
@@ -41,4 +41,4 @@ def send_message():
 
 
 if __name__ == '__main__':
-    channel.start_consuming()
+    sms_channel.start_consuming()

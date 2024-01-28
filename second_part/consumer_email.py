@@ -13,9 +13,9 @@ pika.ConnectionParameters(
 )
 )
 
-channel = connection.channel()
-queue_name = "hw_8_queue"
-channel.queue_declare(queue=queue_name, durable=True)
+email_channel = connection.channel()
+email_queue_name = "email_queue"
+email_channel.queue_declare(queue=email_queue_name, durable=True)
 
 
 def callback(ch, method, properties, body):
@@ -32,8 +32,8 @@ def callback(ch, method, properties, body):
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
-channel.basic_qos(prefetch_count=1)
-channel.basic_consume(queue=queue_name, on_message_callback=callback)
+email_channel.basic_qos(prefetch_count=1)
+email_channel.basic_consume(queue=email_queue_name, on_message_callback=callback)
 
 
 def send_message():
@@ -41,4 +41,4 @@ def send_message():
 
 
 if __name__ == '__main__':
-    channel.start_consuming()
+    email_channel.start_consuming()

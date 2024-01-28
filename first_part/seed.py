@@ -6,6 +6,7 @@ from models import Author, Quote
 
 
 if __name__ == '__main__':
+
     with open('authors.json', encoding='utf-8') as fd:
         data = json.load(fd)
         for el in data:
@@ -15,8 +16,6 @@ if __name__ == '__main__':
                 author.save()
             except NotUniqueError:
                 print(f"Автор вже існує {el.get('fullname')}")
-
-
 
     with open('quotes.json', encoding='utf-8') as fd:
         data = json.load(fd)

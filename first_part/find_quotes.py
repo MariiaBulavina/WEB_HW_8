@@ -70,9 +70,3 @@ def main():
 if __name__ == '__main__':
 
     main()
-    # print(find_by_tag('li'))
-    # print(find_by_tag('mi'))
-    # print(find_by_tag('mi'))
-
-    # print(find_by_author('in'))
-    # print(find_by_author('in'))
