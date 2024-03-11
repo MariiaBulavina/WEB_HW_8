@@ -3,27 +3,25 @@ import pika
 from models import Contact
 
 
-credentials = pika.PlainCredentials("sqasnxyg", "YKyUq_5sEQnPdvfdq-LPnH0nxsYcdvqr")
+credentials = pika.PlainCredentials('sqasnxyg', 'YKyUq_5sEQnPdvfdq-LPnH0nxsYcdvqr')
 connection = pika.BlockingConnection(
 pika.ConnectionParameters(
-    host="albatross-01.rmq.cloudamqp.com",
+    host='albatross-01.rmq.cloudamqp.com',
     port=5672,
     credentials=credentials,
-    virtual_host="sqasnxyg",
+    virtual_host='sqasnxyg',
 )
 )
 
 email_channel = connection.channel()
-email_queue_name = "email_queue"
+email_queue_name = 'email_queue'
 email_channel.queue_declare(queue=email_queue_name, durable=True)
 
 
 def callback(ch, method, properties, body):
 
     message = body.decode()
-
     contact = Contact.objects(id=message)
-
     sending_result = send_message()
 
     if sending_result:

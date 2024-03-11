@@ -1,12 +1,12 @@
-from typing import Any
 from pprint import pprint
+from typing import Any
 
 import redis
 from redis_lru import RedisLRU
 
 from models import Author, Quote
 
-client = redis.StrictRedis(host="localhost", port=6379, password=None)
+client = redis.StrictRedis(host='localhost', port=6379, password=None)
 cache = RedisLRU(client)
 
 
